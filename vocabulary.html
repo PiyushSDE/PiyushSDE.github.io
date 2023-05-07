@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Title</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"
+        integrity="sha512-r22gChDnGvBylk90+2e/ycr3RVrDi8DIOkIGNhJlKfuyQM4tIRAI062MaV8sfjQKYVGjOBaZBOA87z+IhZE9DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 35%;
+        }
+
+        th,
+        td {
+            padding: 8px;
+            text-align: left;
+            border: 1px solid black;
+        }
+
+        th {
+            background-color: #ddd;
+            font-weight: bold;
+        }
+
+        th:first-child,
+        td:first-child {
+            width: 10%;
+        }
+
+        th:first-child,
+        td:first-child {
+            width: 10%;
+        }
+
+        th:first-child,
+        td:first-child {
+            width: 10%;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Vocabulary Website</h1>
+        <nav>
+            <ul>
+                <li><a href="#">Vocabularies</a></li>
+                <li><a href="#">Synonyms</a></li>
+                <li><a href="#">Antonyms</a></li>
+                <li><a href="#">Idioms</a></li>
+                <li><a href="#">One word substitution</a></li>
+            </ul>
+        </nav>
+    </header>
+    <!-- Your content goes here -->
+    <div class="table"></div>
+    <script>
+        let table = document.querySelector(".table");
+        (
+            async () => {
+                let workbook = XLSX.read(await (await fetch("./Vocab.xlsx")).arrayBuffer());
+                console.log(workbook);
+                let worksheet = workbook.SheetNames;
+                worksheet.forEach(name => {
+                    let html = XLSX.utils.sheet_to_html(workbook.Sheets[name]);
+                    table.innerHTML += `<h3>${name} </h3>${html}`;
+                })
+            }
+        )()
+    </script>
+</body>
+
+</html>
