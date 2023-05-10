@@ -76,10 +76,8 @@
                 worksheet.forEach(name => {
                     let html = XLSX.utils.sheet_to_html(workbook.Sheets[name]);
                     table.innerHTML += `<h3>${name} </h3>${html}`;
-                })
-            }
-        )()
-        deleteEmptyRows();
+                    
+                    deleteEmptyRows();
 function checkIfCellsAreEmpty(row) {
   var cells =  row.cells;
   var isCellEmpty = false;
@@ -91,14 +89,18 @@ function checkIfCellsAreEmpty(row) {
   return !isCellEmpty;
 }
 function deleteEmptyRows() {
-  var myTable = document.getElementById("table");
+  var table = document.getElementById("table");
   for(var i = 0; i < table.rows.length; i++) {
     var isRowEmpty = checkIfCellsAreEmpty(table.rows[i]);
     if (isRowEmpty) {
-     myTable.rows[i].style.display = "none";
+     table.rows[i].style.display = "none";
     }
   }
 }
+                })
+            }
+        )()
+        
     </script>
 </body>
 
