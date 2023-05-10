@@ -79,6 +79,26 @@
                 })
             }
         )()
+        deleteEmptyRows();
+function checkIfCellsAreEmpty(row) {
+  var cells =  row.cells;
+  var isCellEmpty = false;
+  for(var j = 0; j < cells.length; j++) {
+    if(cells[j].innerHTML !== '') {
+      return isCellEmpty;
+    }
+  }
+  return !isCellEmpty;
+}
+function deleteEmptyRows() {
+  var myTable = document.getElementById("myTable");
+  for(var i = 0; i < myTable.rows.length; i++) {
+    var isRowEmpty = checkIfCellsAreEmpty(myTable.rows[i]);
+    if (isRowEmpty) {
+     myTable.rows[i].style.display = "none";
+    }
+  }
+}
     </script>
 </body>
 
