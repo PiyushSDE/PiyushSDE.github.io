@@ -77,10 +77,27 @@
                     let html = XLSX.utils.sheet_to_html(workbook.Sheets[name]);
                     table.innerHTML += `<h3>${name} </h3>${html}`;
                     
-                    data = XLSX.utils.sheet_to_html(ws, {
-    header:1,
-    blankrows: false
-});
+                     /* var sd= XLSX.utils.sheet_to_json(ws,{header:1,defval:""}); */
+ /* var sheetdata = sheetjs_cleanEmptyRows(sd) */
+ function sheetjs_cleanEmptyRows(sd) {
+    const data = []
+
+        for (var row = 0; row < sd.length; row++) {
+
+              var i = sd[row].length;
+              var j = 0;
+
+            for ( var cell = 0; cell < sd[row].length; cell++){
+
+                if (sd[row][cell].length == 0 ) { j++}
+            }
+          if (j < i) {
+            data.push(sd[row]);
+          }
+
+        }
+        return data;
+ }
                 })
             }
         )()
