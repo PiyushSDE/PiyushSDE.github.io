@@ -77,26 +77,10 @@
                     let html = XLSX.utils.sheet_to_html(workbook.Sheets[name]);
                     table.innerHTML += `<h3>${name} </h3>${html}`;
                     
-                    deleteEmptyRows();
-function checkIfCellsAreEmpty(row) {
-  var cells =  row.cells;
-  var isCellEmpty = false;
-  for(var j = 0; j < cells.length; j++) {
-    if(cells[j].innerHTML !== '') {
-      return isCellEmpty;
-    }
-  }
-  return !isCellEmpty;
-}
-function deleteEmptyRows() {
-  var table = document.getElementById("table");
-  for(var i = 0; i < table.rows.length; i++) {
-    var isRowEmpty = checkIfCellsAreEmpty(table.rows[i]);
-    if (isRowEmpty) {
-     table.rows[i].style.display = "none";
-    }
-  }
-}
+                    data = XLSX.utils.sheet_to_html(ws, {
+    header:1,
+    blankrows: false
+});
                 })
             }
         )()
