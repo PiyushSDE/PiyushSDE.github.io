@@ -91,9 +91,9 @@ function checkIfCellsAreEmpty(row) {
   return !isCellEmpty;
 }
 function deleteEmptyRows() {
-  var myTable = document.getElementById("myTable");
-  for(var i = 0; i < myTable.rows.length; i++) {
-    var isRowEmpty = checkIfCellsAreEmpty(myTable.rows[i]);
+  var myTable = document.getElementById("table");
+  for(var i = 0; i < table.rows.length; i++) {
+    var isRowEmpty = checkIfCellsAreEmpty(table.rows[i]);
     if (isRowEmpty) {
      myTable.rows[i].style.display = "none";
     }
