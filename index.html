@@ -67,32 +67,27 @@
         </nav>
     </header>
     <div class="table"></div>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.15.6/xlsx.full.min.js"></script>
     <script>
         let table = document.querySelector(".table");
         (
-            async () => {
-                let workbook = XLSX.read(await (await fetch("./Vocab.xlsx")).arrayBuffer());
-                console.log(workbook);
-                let worksheet = workbook.SheetNames;
-                worksheet.forEach(name => {
-                    let html = XLSX.utils.sheet_to_html(workbook.Sheets[name]);
-                    let div = document.createElement("div");
-                    div.innerHTML = `<h3>${name}</h3>${html}`;
-                    table.appendChild(div);
-
-                    // Hide table rows where Item1_c is null or 0
-                    let rows = div.querySelectorAll("tr");
-                    rows.forEach(row => {
-                        let item1 = row.querySelector("td:first-child");
-                        if (item1 && (item1.textContent.trim() == "" || parseInt(item1.textContent
-                                .trim()) == 0)) {
-                            row.classList.add("hide");
-                        }
-                    });
-                });
-            }
+          async () => {
+            let sheetId = "18o8BXgIVh2R9JBZxABzAe1fIzPcvQPB5"; // Replace with your Google Sheet ID
+            let sheetName = "Vocabulary"; // Replace with your sheet name
+            
+            let url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:csv&sheet=${sheetName}`;
+            let response = await fetch(url);
+            let data = await response.text();
+            
+            let workbook = XLSX.read(data, {type: "binary"});
+            let worksheet = workbook.SheetNames;
+            worksheet.forEach(name => {
+              let html = XLSX.utils.sheet_to_html(workbook.Sheets[name]);
+              table.innerHTML += `<h3>${name} </h3>${html}`;
+            });
+          }
         )();
-    </script>
+      </script>
 </body>
 
 </html>
