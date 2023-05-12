@@ -83,7 +83,7 @@
             let worksheet = workbook.SheetNames;
             worksheet.forEach(name => {
               let html = XLSX.utils.sheet_to_html(workbook.Sheets[name]);
-              table.innerHTML += `<h3>${name} </h3>${html}`;
+              table.innerHTML += `<h3>${sheetName} </h3>${html}`;
             });
           }
         )();
