@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv='cache-control' content='no-cache'>
+    <meta http-equiv='expires' content='0'>
+    <meta http-equiv='pragma' content='no-cache'>
+    <title>examvocab</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"
+        integrity="sha512-r22gChDnGvBylk90+2e/ycr3RVrDi8DIOkIGNhJlKfuyQM4tIRAI062MaV8sfjQKYVGjOBaZBOA87z+IhZE9DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9964782686235137"
+        crossorigin="anonymous"></script>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 35%;
+        }
+
+        th,
+        td {
+            padding: 8px;
+            text-align: left;
+            border: 1px solid black;
+        }
+
+        th {
+            background-color: #ddd;
+            font-weight: bold;
+        }
+
+        th:first-child,
+        td:first-child {
+            width: 10%;
+        }
+
+        th:first-child,
+        td:first-child {
+            width: 10%;
+        }
+
+        th:first-child,
+        td:first-child {
+            width: 10%;
+        }
+
+        .hide {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Synonyms</h1>
+
+    </header>
+    <div class="table"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.15.6/xlsx.full.min.js"></script>
+    <script>
+        let table = document.querySelector(".table");
+        (
+            async () => {
+                let sheetId = "18o8BXgIVh2R9JBZxABzAe1fIzPcvQPB5"; // Replace with your Google Sheet ID
+                let sheetName = "Vocabulary"; // Replace with your sheet name
+
+                let url =
+                `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:csv&sheet=${sheetName}`;
+                let response = await fetch(url);
+                let data = await response.text();
+
+                let workbook = XLSX.read(data, {
+                    type: "binary"
+                });
+                let worksheet = workbook.SheetNames;
+                worksheet.forEach(name => {
+                    let html = XLSX.utils.sheet_to_html(workbook.Sheets[name]);
+                    table.innerHTML += `<h3>${sheetName} </h3>${html}`;
+                });
+            }
+        )();
+    </script>
+</body>
+
+</html>
